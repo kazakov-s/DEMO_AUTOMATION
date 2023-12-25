@@ -27,7 +27,8 @@ password = config.get('DEFAULT', 'pass')
 email = config.get('DEFAULT', 'email')
 title = config.get('DEFAULT', 'title')
 text = config.get('DEFAULT', 'text')
-path = os.path.dirname(os.path.abspath(__file__)) + '\\' + config.get('DEFAULT', 'path')
+full_path = os.path.dirname(os.path.abspath(__file__)) + '\\' + config.get('DEFAULT', 'path')
+path = config.get('DEFAULT', 'path')
 
 
 # Создаем файл вложения
