@@ -4,7 +4,7 @@
 
 import pytest
 import requests
-
+import allure
 
 class TestScanInterfax:
     BASE_URL = 'https://gateway.scan-interfax.ru'
@@ -16,6 +16,12 @@ class TestScanInterfax:
 
     # Авторизуемся в API
     @pytest.mark.order(4)
+    @allure.suite("Тестирование API")
+    @allure.title('Авторизация в API SCAN Interfax')
+    @allure.description('Авторизация в API SCAN Interfax с валидными данными')
+    @allure.tag('API AUTHORISATION')
+    @allure.severity(allure.severity_level.BLOCKER)
+    @allure.label('Developer', 'Sergey Kazakov')
     def test_authorisation(self):
         URL = self.BASE_URL + '/api/v1/account/login'
         headers = {'content-type': 'application/json'}
@@ -30,6 +36,12 @@ class TestScanInterfax:
 
     # Проверим баланс пользователя
     @pytest.mark.order(5)
+    @allure.suite("Тестирование API")
+    @allure.title('Проверка баланса пользователя')
+    @allure.description('Проверяем баланс с предварительной авторизацией пользователя')
+    @allure.tag('BALANCE CHECK')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.label('Developer', 'Sergey Kazakov')
     def test_user_balance(self):
         auth_key = self.test_authorisation()
         URL = self.BASE_URL + '/api/v1/account/balance'
@@ -42,6 +54,12 @@ class TestScanInterfax:
 
     # Получим темы публикаций
     @pytest.mark.order(6)
+    @allure.suite("Тестирование API")
+    @allure.title('Получаем темы публикаций пользователя')
+    @allure.description('Получаем темы публикаций пользователя с предварительной авторизацией')
+    @allure.tag('SUBJECTS CHECK')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.label('Developer', 'Sergey Kazakov')
     def test_publication_topics(self):
         auth_key = self.test_authorisation()
         URL = self.BASE_URL + '/api/v1/entities/subjects'
@@ -53,6 +71,12 @@ class TestScanInterfax:
 
     # Получим документы
     @pytest.mark.order(7)
+    @allure.suite("Тестирование API")
+    @allure.title('Получаем документы пользователя')
+    @allure.description('Получаем документы пользователя с предварительной авторизацией')
+    @allure.tag('DOCUMENTS CHECK')
+    @allure.severity(allure.severity_level.NORMAL)
+    @allure.label('Developer', 'Sergey Kazakov')
     def test_documents(self):
         auth_key = self.test_authorisation()
         URL = self.BASE_URL + '/api/v1/documents'
