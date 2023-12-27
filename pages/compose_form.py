@@ -65,12 +65,6 @@ class ComposeMessage:
             allure.attach(self.browser.get_screenshot_as_png(), name='Screenshot', attachment_type=AttachmentType.PNG)
 
     # Проверяем поля сообщения на корректность заполнения
-    @allure.suite("Формирование сообщения")
-    @allure.title('Проверяем поля сообщения на корректность заполнения')
-    @allure.description('Проверяем поля сообщения на соответствие данным, полученным из файла data.ini')
-    @allure.tag('INPUTS EXPECTATION')
-    @allure.severity(allure.severity_level.BLOCKER)
-    @allure.label('Developer', 'Sergey Kazakov')
     def compose_confirm(self):
         address = WW(self.browser, 10).until(EC.presence_of_element_located(self.confirm_address)).text
         assert address == email
@@ -84,12 +78,6 @@ class ComposeMessage:
         allure.attach(self.browser.get_screenshot_as_png(), name='Screenshot', attachment_type=AttachmentType.PNG)
 
     # Отправляем сообщение
-    @allure.suite("Формирование сообщения")
-    @allure.title('Отправка сообщения')
-    @allure.description('Отправка сообщения')
-    @allure.tag('SEND MESSAGE')
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.label('Developer', 'Sergey Kazakov')
     def send_message(self):
         try:
             WW(self.browser, 10).until(EC.presence_of_element_located(self.send_ele)).click()
@@ -100,12 +88,6 @@ class ComposeMessage:
             allure.attach(self.browser.get_screenshot_as_png(), name='Screenshot', attachment_type=AttachmentType.PNG)
 
     # Проверяем факт отправки сообщения
-    @allure.suite("Формирование сообщения")
-    @allure.title('Проверяем факт отправки сообщения')
-    @allure.description('Проверяем факт отправки сообщения')
-    @allure.tag('SEND CONFIRMATION')
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.label('Developer', 'Sergey Kazakov')
     def send_confirm(self):
         assert WW(self.browser, 10).until(EC.element_to_be_clickable(self.confirm_ele))
         allure.attach(self.browser.get_screenshot_as_png(), name='Screenshot', attachment_type=AttachmentType.PNG)

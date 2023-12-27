@@ -11,6 +11,7 @@ from time import sleep
 import allure
 
 
+
 class LoginPage:
     user_ele = (By.XPATH, '//input[@name="username"]')
     password_ele = (By.XPATH, '//input[@name="password"]')
@@ -26,13 +27,6 @@ class LoginPage:
 
 
     #Заполняем форму авторизации и проверяем успешность авторизации
-    @allure.suite("Авторизация")
-    @allure.title('Заполняем форму авторизации и проверяем успешность авторизации')
-    @allure.description(
-        f'Авторизация в почтовом сервисе Mail.Ru с валидными данными. Username: {{username}} Password: {{password}}')
-    @allure.tag('AUTHENTICATION')
-    @allure.severity(allure.severity_level.BLOCKER)
-    @allure.label('Developer', 'Sergey Kazakov')
     def login(self):
         try:
             WW(self.browser, 10).until(EC.visibility_of_element_located(self.user_ele)).send_keys(username)
@@ -50,12 +44,6 @@ class LoginPage:
             allure.attach(self.browser.get_screenshot_as_png(), name='Screenshot', attachment_type=AttachmentType.PNG)
 
     # Проверяем факт перехода в папку "Входящие" под авторизованным пользователем
-    @allure.suite("Авторизация")
-    @allure.title('Проверяем факт перехода в папку "Входящие" под авторизованным пользователем')
-    @allure.description('Проверяем соответствие URL в адресной строке браузера ожидаемому.')
-    @allure.tag('URL EXPECTATION')
-    @allure.severity(allure.severity_level.BLOCKER)
-    @allure.label('Developer', 'Sergey Kazakov')
     def url_confirm(self):
         try:
             WW(self.browser, 10).until(EC.element_to_be_clickable((self.expect_ele)))
